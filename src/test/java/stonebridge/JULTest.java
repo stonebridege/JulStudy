@@ -191,59 +191,59 @@ public class JULTest {
          */
     }
 
-@Test
-public void test05() {
+    @Test
+    public void test05() {
 
-    /*
+        /*
 
-     Logger之间的父子关系。JUL中Logger之间是存在"父子"关系的。值得注意的是，这种父子关系不是我们普遍认为的类之间的继承关系
-     关系是通过树状结构存储的。
+         Logger之间的父子关系。JUL中Logger之间是存在"父子"关系的。值得注意的是，这种父子关系不是我们普遍认为的类之间的继承关系
+         关系是通过树状结构存储的。
 
-    JUL在初始化时会创建一个顶层RootLogger作为所有Logger的父Logger
-    查看源码：
-        owner.rootLogger = owner.new RootLogger();
-        RootLogger是LogManager的内部类
-        java.util.logging.LogManager$RootLogger
-        默认的名称为 空串
-    以上的RootLogger对象作为树状结构的根节点存在的
-    将来自定义的父子关系通过路径来进行关联
-    父子关系，同时也是节点之间的挂载关系
-    owner.addLogger(owner.rootLogger);
-    LoggerContext cx = getUserContext(); //LoggerContext一种用来保存节点的Map关系
-    private LogNode               node; //节点
+        JUL在初始化时会创建一个顶层RootLogger作为所有Logger的父Logger
+        查看源码：
+            owner.rootLogger = owner.new RootLogger();
+            RootLogger是LogManager的内部类
+            java.util.logging.LogManager$RootLogger
+            默认的名称为 空串
+        以上的RootLogger对象作为树状结构的根节点存在的
+        将来自定义的父子关系通过路径来进行关联
+        父子关系，同时也是节点之间的挂载关系
+        owner.addLogger(owner.rootLogger);
+        LoggerContext cx = getUserContext(); //LoggerContext一种用来保存节点的Map关系
+        private LogNode               node; //节点
 
-     */
-    /*
-        从下面创建的两个logger对象看来
-        我们可以认为logger1是logger2的父亲
-     */
-    //父亲是RootLogger，名称默认是一个空的字符串；RootLogger可以被称之为所有logger对象的顶层logger
-    Logger logger1 = Logger.getLogger("stonebridge");
-    Logger logger2 = Logger.getLogger("stonebridge.JULTest");
-    System.out.println(logger2.getParent() == logger1); //true
+         */
+        /*
+            从下面创建的两个logger对象看来
+            我们可以认为logger1是logger2的父亲
+         */
+        //父亲是RootLogger，名称默认是一个空的字符串；RootLogger可以被称之为所有logger对象的顶层logger
+        Logger logger1 = Logger.getLogger("stonebridge");
+        Logger logger2 = Logger.getLogger("stonebridge.JULTest");
+        System.out.println(logger2.getParent() == logger1); //true
 
-    System.out.println("logger1的父Logger引用为:" + logger1.getParent() + "; 名称为" + logger1.getName() + "; 父亲的名称为" + logger1.getParent().getName());
-    System.out.println("logger2的父Logger引用为:" + logger2.getParent() + "; 名称为" + logger2.getName() + "; 父亲的名称为" + logger2.getParent().getName());
-    /*
-        父亲所做的设置，也能够同时作用于儿子
-        对logger1做日志打印相关的设置，然后我们使用logger2进行日志的打印
-     */
-    //父亲做设置
-    logger1.setUseParentHandlers(false);
-    ConsoleHandler handler = new ConsoleHandler();
-    SimpleFormatter formatter = new SimpleFormatter();
-    handler.setFormatter(formatter);
-    logger1.addHandler(handler);
-    handler.setLevel(Level.ALL);
-    logger1.setLevel(Level.ALL);
+        System.out.println("logger1的父Logger引用为:" + logger1.getParent() + "; 名称为" + logger1.getName() + "; 父亲的名称为" + logger1.getParent().getName());
+        System.out.println("logger2的父Logger引用为:" + logger2.getParent() + "; 名称为" + logger2.getName() + "; 父亲的名称为" + logger2.getParent().getName());
+        /*
+            父亲所做的设置，也能够同时作用于儿子
+            对logger1做日志打印相关的设置，然后我们使用logger2进行日志的打印
+         */
+        //父亲做设置
+        logger1.setUseParentHandlers(false);
+        ConsoleHandler handler = new ConsoleHandler();
+        SimpleFormatter formatter = new SimpleFormatter();
+        handler.setFormatter(formatter);
+        logger1.addHandler(handler);
+        handler.setLevel(Level.ALL);
+        logger1.setLevel(Level.ALL);
 
-    //儿子做打印
-    logger2.severe("severe信息");
-    logger2.warning("warning信息");
-    logger2.info("info信息");
-    logger2.config("config信息");
-    logger2.fine("fine信息");
-    logger2.finer("finer信息");
-    logger2.finest("finest信息");
-}
+        //儿子做打印
+        logger2.severe("severe信息");
+        logger2.warning("warning信息");
+        logger2.info("info信息");
+        logger2.config("config信息");
+        logger2.fine("fine信息");
+        logger2.finer("finer信息");
+        logger2.finest("finest信息");
+    }
 }
