@@ -2,7 +2,9 @@ package stonebridge;
 
 import org.junit.Test;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.*;
 
 public class JULTest {
@@ -246,4 +248,44 @@ public class JULTest {
         logger2.finer("finer信息");
         logger2.finest("finest信息");
     }
+
+@Test
+public void test06() throws Exception {
+    /*
+        以上所有的配置相关的操作，都是以java硬编码的形式进行的
+        我们可以使用更加清晰，更加专业的一种做法，就是使用配置文件
+        如果我们没有自己添加配置文件，则会使用系统默认的配置文件
+        这个配置文件：
+            owner.readPrimordialConfiguration();
+            readConfiguration();
+            java.home --> 找到jre文件夹 --> lib --> logging.properties
+        做文件日志打印，新日志会覆盖掉原来的日志
+        但是我们现在的需求不是覆盖，而是追加
+     */
+    InputStream input = new FileInputStream("C:\\Users\\stone\\Desktop\\日志\\logging.properties");
+    //取得日志管理器对象
+    LogManager logManager = LogManager.getLogManager();
+    //读取自定义的配置文件
+    logManager.readConfiguration(input);
+    Logger logger = Logger.getLogger("stonebridge.JULTest");
+
+    logger.severe("severe信息");
+    logger.warning("warning信息");
+    logger.info("info信息");
+    logger.config("config信息");
+    logger.fine("fine信息");
+    logger.finer("finer信息");
+    logger.finest("finest信息");
+    /*
+        JUL日志框架使用方式总结（原理解析）
+            1.初始化LogManager
+                LogManager加载logging.properties配置文件
+                添加Logger到LogManager
+            2.从单例的LogManager获取Logger
+            3.设置日志级别Level，在打印的过程中使用到了日志记录的LogRecord类
+            4.Filter作为过滤器提供了日志级别之外更细粒度的控制
+            5.Handler日志处理器，决定日志的输出位置，例如控制台、文件...
+            6.Formatter是用来格式化输出的
+     */
+}
 }
