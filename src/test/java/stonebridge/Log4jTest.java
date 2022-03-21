@@ -9,4 +9,10 @@ public class Log4jTest {
         Log4jTest01 log4jTest = new Log4jTest01();
         log4jTest.test01();
     }
+
+    @Test
+    public void test02() {
+        Log4jTest01 log4jTest = new Log4jTest01();
+        log4jTest.test02();
+    }
 }
