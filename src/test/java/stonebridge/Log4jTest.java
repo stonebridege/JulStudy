@@ -15,4 +15,15 @@ public class Log4jTest {
         Log4jTest01 log4jTest = new Log4jTest01();
         log4jTest.test02();
     }
+    @Test
+    public void test03() {
+        Log4jTest01 log4jTest = new Log4jTest01();
+        log4jTest.test03();
+    }
+
+    @Test
+    public void test04() {
+        Log4jTest01 log4jTest = new Log4jTest01();
+        log4jTest.test04();
+    }
 }

@@ -166,4 +166,48 @@ public class Log4jTest01 {
         logger.debug("debug信息");
         logger.trace("trace信息");
     }
+
+    public void test04() {
+
+        /*
+
+        关于log4j.properties layout属性的配置
+            其中PatternLayout是日常使用最多的方式
+            查看其源码
+            setConversionPattern这个方法就是该PatternLayout的核心方法
+            conversionPattern
+
+            在log4j.properties中将layout设置为PatternLayout
+            我们主要配置的是conversionPattern属性
+
+            %m 输出代码中指定的日志信息
+            %p 输出优先级，及 DEBUG、INFO 等
+            %n 换行符（Windows平台的换行符为 "\n"，Unix 平台为 "\n"）
+            %r 输出自应用启动到输出该 log 信息耗费的毫秒数
+            %c 输出打印语句所属的类的全名
+            %t 输出产生该日志的线程全名
+            %d 输出服务器当前时间，默认为 ISO8601，也可以指定格式，如：%d{yyyy年MM月dd日 HH:mm:ss}
+            %l 输出日志时间发生的位置，包括类名、线程、及在代码中的行数。如：Test.main(Test.java:10)
+            %F 输出日志消息产生时所在的文件名称
+            %L 输出代码中的行号
+            %% 输出一个 "%" 字符
+            [%p]%r %c %t %d{yyyy-MM-dd HH:mm:ss:SSS} %m%n
+                [DEBUG]1 com.stonebridge.log4j.test.Log4jTest01 main 2022-03-22 22:01:10:584 debug信息
+            可以在 % 与字符之间加上修饰符来控制最小宽度、最大宽度和文本的对其方式
+            [%10p]：[]中必须有10个字符，由空格来进行补齐，信息右对齐
+                [%10p]%r %c %t %d{yyyy-MM-dd HH:mm:ss:SSS} %m%n
+                [      WARN]1 com.stonebridge.log4j.test.Log4jTest01 main 2022-03-22 22:03:18:916 warn信息
+
+            [%-10p]：[]中必须有10个字符，由空格来进行补齐，信息左对齐，应用较广泛
+         */
+
+//        LogLog.setInternalDebugging(true);
+        Logger logger = Logger.getLogger(Log4jTest01.class);
+        logger.fatal("fatal信息");
+        logger.error("error信息");
+        logger.warn("warn信息");
+        logger.info("info信息");
+        logger.debug("debug信息");
+        logger.trace("trace信息");
+    }
 }
