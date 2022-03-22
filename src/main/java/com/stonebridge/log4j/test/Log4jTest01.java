@@ -210,4 +210,34 @@ public class Log4jTest01 {
         logger.debug("debug信息");
         logger.trace("trace信息");
     }
+
+    public void test05() {
+
+        /*
+            将日志信息输出到文件中（以后所有的练习统一使用配置文件（不硬编码））
+            配置log4j.appender.console=org.apache.log4j.ConsoleAppender配置的是输出到控制台相关的配置
+            一般情况下做多方向的输出。控制台的配置我们保留，另外再配置一套关于输出到文件的配置，将日志保存到文件中。
+
+
+            日志文件要保存到哪个磁盘相关的配置
+            查看FileAppender的源码
+            看到属性信息
+            protected boolean fileAppend; 表示是否追加信息，通过构造方法赋值为true
+            protected int bufferSize; 缓冲区的大小，通过构造方法赋值为8192
+
+            继续观察，找到setFile方法，这个方法就是用来指定文件位置的方法
+            通过ognl，可以推断setFile方法操作的属性就是file
+
+            如果有输出中文的需求怎么办
+            观察FileAppender的父类
+            找到protected String encoding;属性
+         */
+        Logger logger = Logger.getLogger(Log4jTest01.class);
+        logger.fatal("fatal信息");
+        logger.error("error信息");
+        logger.warn("warn信息");
+        logger.info("info信息");
+        logger.debug("debug信息");
+        logger.trace("trace信息");
+    }
 }
