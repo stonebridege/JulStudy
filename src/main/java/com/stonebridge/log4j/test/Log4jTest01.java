@@ -284,6 +284,12 @@ public class Log4jTest01 {
          */
         Logger logger = Logger.getLogger(Log4jTest01.class);
         for (int i = 0; i < 10000; i++) {
+            try {
+                Thread.sleep(100);
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+
             logger.fatal("fatal信息");
             logger.error("error信息");
             logger.warn("warn信息");
