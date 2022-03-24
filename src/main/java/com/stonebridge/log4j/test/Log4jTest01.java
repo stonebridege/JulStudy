@@ -286,7 +286,7 @@ public class Log4jTest01 {
         for (int i = 0; i < 10000; i++) {
             try {
                 Thread.sleep(100);
-            }catch (Exception exception){
+            } catch (Exception exception) {
                 exception.printStackTrace();
             }
 
@@ -297,5 +297,49 @@ public class Log4jTest01 {
             logger.debug("debug信息");
             logger.trace("trace信息");
         }
+    }
+
+    public void test07() {
+
+        /*
+
+            将日志持久化到数据库表中
+
+                创建表结构：（字段的制定可以根据需求进行调整）
+
+                CREATE TABLE tbl_log(
+
+                    id int(11) NOT NULL AUTO_INCREMENT,
+                    name varchar(255) DEFAULT NULL COMMENT '项目名称',
+                    createTime varchar(255) DEFAULT NULL COMMENT '创建时间',
+                    level varchar(255) DEFAULT NULL COMMENT '日志级别',
+                    category varchar(255) DEFAULT NULL COMMENT '所在类的全路径',
+                    fileName varchar(255) DEFAULT NULL COMMENT '文件名称',
+                    message varchar(255) DEFAULT NULL COMMENT '日志消息',
+                    PRIMARY KEY(id)
+
+                )
+
+            对于数据库表的日志输出进行相应配置
+            #配置appender输出方式 输出到数据库表
+            log4j.appender.logDB=org.apache.log4j.jdbc.JDBCAppender
+            log4j.appender.logDB.layout=org.apache.log4j.PatternLayout
+            log4j.appender.logDB.Driver=com.mysql.jdbc.Driver
+            log4j.appender.logDB.URL=jdbc:mysql://localhost:3306/test
+            log4j.appender.logDB.User=root
+            log4j.appender.logDB.Password=123456
+            log4j.appender.logDB.Sql=INSERT INTO tbl_log(name,createTime,level,category,fileName,message) values('project_log','%d{yyyy-MM-dd HH:mm:ss}','%p','%c','%F','%m')
+
+
+         */
+
+        Logger logger = Logger.getLogger(Log4jTest01.class);
+
+        logger.fatal("fatal信息");
+        logger.error("error信息");
+        logger.warn("warn信息");
+        logger.info("info信息");
+        logger.debug("debug信息");
+        logger.trace("trace信息");
     }
 }
