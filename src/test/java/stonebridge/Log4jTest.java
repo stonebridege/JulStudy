@@ -36,4 +36,15 @@ public class Log4jTest {
         Log4jTest01 log4jTest = new Log4jTest01();
         log4jTest.test06();
     }
+    @Test
+    public void test07() {
+        Log4jTest01 log4jTest = new Log4jTest01();
+        log4jTest.test07();
+    }
+
+    @Test
+    public void test08() {
+        Log4jTest01 log4jTest = new Log4jTest01();
+        log4jTest.test08();
+    }
 }

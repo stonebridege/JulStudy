@@ -342,4 +342,56 @@ public class Log4jTest01 {
         logger.debug("debug信息");
         logger.trace("trace信息");
     }
+
+    public void test08() {
+
+        /*
+
+            Log4j的自定义logger
+                我们以前所创建出来的Logger对象，默认都是继承rootLogger的
+                我们也可以自定义logger，让其他logger来继承这个logger
+
+                这种继承关系就是按照包结构的关系来进行指定的
+                例如我们一直使用的
+                Logger logger = Logger.getLogger(Log4jTest01.class);
+                路径就是：com.bjpowernode.log4j.test.Log4jTest01
+                它的父logger就是上层的路径或者是更上层的路径
+                例如：
+                    com.bjpowernode.log4j.test
+                    com.bjpowernode.log4j
+                    ...
+                    com
+
+                参照logger是如何加载配置文件的
+                查看PropertyConfigurator的源码
+                得到信息log4j.logger.
+                这个属性值log4j.logger.就是我们在配置文件中对于自定义logger的配置属性
+
+                假设我们现在的配置是这样的：
+
+                #配置根节点logger
+                log4j.rootLogger=trace,console
+
+                #配置自定义logger
+                log4j.logger.com.bjpowernode.log4j.test=info,file
+
+                观察结果：
+                    从输出位置来看，控制台输出了信息，日志文件也输出了信息
+                    所以可以得出结论，如果根节点的logger和自定义父logger配置的输出位置是不同的
+                    则取二者的并集，配置的位置都会进行输出操作
+
+                    如果二者配置的日志级别不同，以按照我们自定的父logger的级别输出为主
+
+
+         */
+
+        Logger logger = Logger.getLogger(Log4jTest01.class);
+
+        logger.fatal("fatal信息");
+        logger.error("error信息");
+        logger.warn("warn信息");
+        logger.info("info信息");
+        logger.debug("debug信息");
+        logger.trace("trace信息");
+    }
 }
