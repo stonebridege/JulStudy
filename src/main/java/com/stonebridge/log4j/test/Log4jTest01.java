@@ -394,4 +394,48 @@ public class Log4jTest01 {
         logger.debug("debug信息");
         logger.trace("trace信息");
     }
+
+    public void test09() {
+        /*
+            自定义logger的应用场景
+            我们之所以要自定义logger，就是为了针对不同系统信息做更加灵活的输出操作
+            例如：
+                我们可以在原有案例的基础之上，加上一个apache的日志输出
+                log4j.logger.org.apache=error,console
+                我们现在在配置文件中配置的logger有如下3项
+                log4j.rootLogger=trace,console
+                log4j.logger.com.bjpowernode.log4j.test=info,file
+                log4j.logger.org.apache=error,console
+
+         */
+
+ /*
+    当前的类路径com.stonebridge.log4j.test
+    在配置文件中所找到的能够作用的自定义logger和根logger
+    log4j.rootLogger=trace,console
+    com.stonebridge.log4j.test=info,file
+    我们刚才配置的log4j.logger.org.apache的路径和我们的com.stonebridge.log4j.test不相符
+    不构成父子关系，所以没有执行apache相关的配置。
+ */
+        Logger logger = Logger.getLogger(Log4jTest01.class);
+        logger.fatal("fatal信息");
+        logger.error("error信息");
+        logger.warn("warn信息");
+        logger.info("info信息");
+        logger.debug("debug信息");
+        logger.trace("trace信息");
+/*
+    Logger.class的路径是org.apache.log4j.Logger，此时是log4j.logger.org.apache的子logger
+    console在根节点中进行了配置，在apache中也进行了配置。
+    由于输出的位置appender取的是并集
+    所以，既然都配置了，那么就输出了两次
+*/
+        Logger logger1 = Logger.getLogger(Logger.class);
+        logger1.fatal("fatal信息 --");
+        logger1.error("error信息 --");
+        logger1.warn("warn信息 --");
+        logger1.info("info信息 --");
+        logger1.debug("debug信息 --");
+        logger1.trace("trace信息 --");
+    }
 }

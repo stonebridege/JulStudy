@@ -15,6 +15,7 @@ public class Log4jTest {
         Log4jTest01 log4jTest = new Log4jTest01();
         log4jTest.test02();
     }
+
     @Test
     public void test03() {
         Log4jTest01 log4jTest = new Log4jTest01();
@@ -26,16 +27,19 @@ public class Log4jTest {
         Log4jTest01 log4jTest = new Log4jTest01();
         log4jTest.test04();
     }
+
     @Test
     public void test05() {
         Log4jTest01 log4jTest = new Log4jTest01();
         log4jTest.test05();
     }
+
     @Test
     public void test06() {
         Log4jTest01 log4jTest = new Log4jTest01();
         log4jTest.test06();
     }
+
     @Test
     public void test07() {
         Log4jTest01 log4jTest = new Log4jTest01();
@@ -46,5 +50,11 @@ public class Log4jTest {
     public void test08() {
         Log4jTest01 log4jTest = new Log4jTest01();
         log4jTest.test08();
+    }
+
+    @Test
+    public void test09() {
+        Log4jTest01 log4jTest = new Log4jTest01();
+        log4jTest.test09();
     }
 }
